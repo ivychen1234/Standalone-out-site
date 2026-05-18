@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viverse World Gateway</title>
+  <meta
+    name="description"
+    content="A cinematic landing page for the Viverse world TJsFrUY, designed for GitHub Pages publishing."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg: #090c14;
+      --bg-soft: #121827;
+      --panel: rgba(10, 14, 24, 0.72);
+      --panel-strong: rgba(6, 8, 14, 0.9);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4efe7;
+      --muted: #c9c0b1;
+      --accent: #c98f54;
+      --accent-soft: #efe0cc;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(201, 143, 84, 0.18), transparent 28%),
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 18%),
+        linear-gradient(180deg, #111521 0%, #090c14 45%, #07090f 100%);
+      font-family: "Manrope", sans-serif;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+      pointer-events: none;
+      opacity: 0.22;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 10%, rgba(255, 214, 167, 0.12), transparent 24%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 7, 12, 0.58);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .topbar-inner,
+    .section-inner,
+    .hero-inner,
+    .footer-inner {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-mark,
+    .eyebrow,
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 11px;
+    }
+
+    .brand-mark {
+      color: var(--accent-soft);
+    }
+
+    .brand-name {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+      line-height: 0.92;
+      letter-spacing: 0.06em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(244, 239, 231, 0.9);
+      font-size: 14px;
+    }
+
+    .nav a {
+      opacity: 0.82;
+      transition: opacity 180ms ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      opacity: 1;
+    }
+
+    .hero {
+      padding: 72px 0 28px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 32px;
+      align-items: end;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .world-panel,
+    .info-card,
+    .quote-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 40px;
+      border-radius: 30px 30px 30px 8px;
+    }
+
+    .eyebrow {
+      color: var(--accent-soft);
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    .display {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      line-height: 0.92;
+    }
+
+    h1 {
+      font-size: clamp(62px, 10vw, 122px);
+      max-width: 10ch;
+    }
+
+    .hero-copy p {
+      max-width: 64ch;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .button {
+      color: #100f10;
+      background: linear-gradient(135deg, #f5d7b0 0%, #bf8450 100%);
+    }
+
+    .ghost-button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .button:hover,
+    .button:focus-visible,
+    .ghost-button:hover,
+    .ghost-button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 100%;
+      padding: 28px;
+      border-radius: 30px 30px 8px 30px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 38%),
+        linear-gradient(160deg, rgba(201, 143, 84, 0.12), rgba(10, 14, 24, 0.9));
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -34% auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(241, 194, 130, 0.32), transparent 68%);
+      filter: blur(8px);
+    }
+
+    .stat {
+      position: relative;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .display {
+      font-size: clamp(34px, 5vw, 56px);
+      color: var(--accent-soft);
+    }
+
+    .stat p,
+    .meta,
+    .label,
+    .note,
+    .section-copy {
+      color: var(--muted);
+    }
+
+    .meta {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .section {
+      padding: 28px 0 84px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.75fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: clamp(42px, 6vw, 76px);
+    }
+
+    .section-copy {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .world-panel {
+      padding: 18px;
+      border-radius: 30px;
+      background: var(--panel-strong);
+    }
+
+    .frame-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 8px 18px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .dots span:first-child {
+      background: #dd9c61;
+    }
+
+    .iframe-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #05070d;
+      aspect-ratio: 16 / 9;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #05070d;
+    }
+
+    .world-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 4px 6px;
+    }
+
+    .note {
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 58ch;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .info-card,
+    .quote-card {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .info-card h3,
+    .quote-card h3 {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .info-card p,
+    .quote-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .quote-card {
+      grid-column: span 2;
+      background:
+        linear-gradient(135deg, rgba(201, 143, 84, 0.16), transparent 42%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .footer {
+      padding: 0 0 48px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(244, 239, 231, 0.75);
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner,
+      .section-heading,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-card {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .world-panel,
+      .info-card,
+      .quote-card {
+        border-radius: 22px;
+      }
+
+      .hero-copy,
+      .hero-card {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: clamp(52px, 18vw, 82px);
+      }
+
+      .frame-header,
+      .world-actions {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .iframe-wrap {
+        aspect-ratio: 4 / 5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark">GitHub Pages Entry</span>
+          <span class="brand-name">Viverse<br>Gateway</span>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="#world">World</a>
+          <a href="#concept">Concept</a>
+          <a href="#details">Details</a>
+          <a href="https://worlds-dev.viverse.com/zh-TW/TJsFrUY" target="_blank" rel="noreferrer">Open Direct</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <article class="hero-copy">
+            <div class="eyebrow">Immersive World Landing</div>
+            <h1>Enter The World Inside The Page.</h1>
+            <p>
+              這是一個可直接發布到 GitHub Pages 的入口頁，視覺語言參考 Frustrain 的敘事式沉浸風格，
+              但主角換成你的 Viverse world。頁面核心是內嵌 world 視窗，並保留直接開啟連結作為備援。
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#world">Launch Embedded World</a>
+              <a
+                class="ghost-button"
+                href="https://worlds-dev.viverse.com/zh-TW/TJsFrUY"
+                target="_blank"
+                rel="noreferrer"
+              >Open In New Tab</a>
+            </div>
+          </article>
+
+          <aside class="hero-card" aria-label="World metadata">
+            <div class="stat">
+              <div class="label">World Code</div>
+              <div class="display">TJsFrUY</div>
+              <p class="meta">Viverse dev world entry for direct browser access and GitHub-hosted showcase use.</p>
+            </div>
+            <div class="stat">
+              <div class="label">Target Platform</div>
+              <div class="display">Web + XR</div>
+              <p class="meta">Designed as a public-facing launch page with embedded preview and off-page fallback.</p>
+            </div>
+            <div class="stat">
+              <div class="label">User Agent Note</div>
+              <div class="display">HTCVRSDET</div>
+              <p class="meta">這個需求無法由純靜態 HTML 強制設定，需在 Playwright 或瀏覽器啟動層處理。</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="world">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Embedded Experience</div>
+              <h2>World Frame</h2>
+            </div>
+            <p class="section-copy">
+              如果目標站允許被嵌入，訪客可直接在此頁內進入 world；若對方站台限制 iframe，底下按鈕仍可直接導向原始 world URL。
+            </p>
+          </div>
+
+          <div class="world-panel">
+            <div class="frame-header">
+              <div class="dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="label">worlds-dev.viverse.com/zh-TW/TJsFrUY</div>
+            </div>
+
+            <div class="iframe-wrap">
+              <iframe
+                src="https://worlds-dev.viverse.com/zh-TW/TJsFrUY"
+                title="Viverse world TJsFrUY"
+                loading="lazy"
+                allow="fullscreen; xr-spatial-tracking; autoplay"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
+
+            <div class="world-actions">
+              <p class="note">
+                若畫面空白、被瀏覽器阻擋，或 world 站台回應拒絕嵌入，請改用右側直接開啟。GitHub Pages 端只能提供外層入口與嵌入容器。
+              </p>
+              <a
+                class="button"
+                href="https://worlds-dev.viverse.com/zh-TW/TJsFrUY"
+                target="_blank"
+                rel="noreferrer"
+              >Open World Directly</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="concept">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Concept</div>
+              <h2>A Frustrain-Like Mood, Rebuilt For Viverse.</h2>
+            </div>
+            <p class="section-copy">
+              版型重點不是複製原站，而是借用它的戲劇化留白、厚重字體、深色霧面材質與作品導向敘事節奏，讓入口頁更像一個作品展示頁而不是單純跳轉頁。
+            </p>
+          </div>
+
+          <div class="grid">
+            <article class="info-card">
+              <span class="label">Visual Direction</span>
+              <h3>Cinematic Surface</h3>
+              <p>以深色冷調背景、暖色高光和大片標題建立沉浸感，適合展示 world、遊戲場景或互動作品。</p>
+            </article>
+
+            <article class="info-card">
+              <span class="label">Publishing</span>
+              <h3>GitHub Pages Ready</h3>
+              <p>檔案為單一靜態 HTML，放在 repo 根目錄即可作為 GitHub Pages 首頁，無需 build 步驟。</p>
+            </article>
+
+            <article class="quote-card">
+              <span class="label">Embedding Constraint</span>
+              <h3>The frame can host the world, but it cannot rewrite the browser identity.</h3>
+              <p>
+                你先前指定的 `HTCVRSDET` user agent 是測試環境的重要條件，但 GitHub Pages 上的靜態頁面無法主動覆寫使用者瀏覽器的 user agent。
+                如果要保證 dev world 正常載入，仍需要從 Playwright、瀏覽器外掛、代理層，或使用者端裝置本身設定來處理。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="details">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Details</div>
+              <h2>What This Entry Page Solves.</h2>
+            </div>
+            <p class="section-copy">
+              這個版本已經把 GitHub publish 所需的首頁、嵌入容器、導流按鈕與說明都放齊；你後續如果要加品牌文案、海報圖或影片區塊，也可以直接往下擴充。
+            </p>
+          </div>
+
+          <div class="grid">
+            <article class="info-card">
+              <span class="label">Entry</span>
+              <h3>Single URL Start</h3>
+              <p>訪客進站後先看到作品感的 landing hero，再選擇直接在頁內體驗或開新分頁進入 world。</p>
+            </article>
+
+            <article class="info-card">
+              <span class="label">Fallback</span>
+              <h3>Safe Navigation</h3>
+              <p>即使 iframe 被目標站限制，頁面仍然可用，不會變成死頁；使用者仍有清楚的行動路徑。</p>
+            </article>
+
+            <article class="info-card">
+              <span class="label">Maintenance</span>
+              <h3>Minimal Footprint</h3>
+              <p>目前只有一個新檔案，後續若要改 world URL、標題或按鈕文字，只需要改這個首頁即可。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>Viverse Gateway Landing Page</span>
+        <span id="year"></span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear() + " GitHub Pages deployment ready";
+  </script>
+</body>
+</html>
