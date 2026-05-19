@@ -99,6 +99,10 @@
       margin: 0 auto;
     }
 
+    #world .section-inner {
+      width: min(calc(100% - 32px), 1400px);
+    }
+
     .topbar-inner {
       display: flex;
       align-items: center;
@@ -355,7 +359,10 @@
       border-radius: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #05070d;
-      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: 100%;
+      height: min(72vh, calc(100vw * 9 / 16));
+      min-height: 360px;
     }
 
     iframe {
